@@ -6,7 +6,8 @@ const {
   create,
   reply,
   update,
-  remove
+  remove,
+  list,
 } = require("../controller/comment.controller")
 
 const {
@@ -18,5 +19,7 @@ commentRouter.post("/:commentId",verifyToken,reply)
 
 commentRouter.patch("/:commentId",verifyToken,verifyPermission,update)
 commentRouter.delete("/:commentId",verifyToken,verifyPermission,remove)
+
+commentRouter.get("/",list)
 
 module.exports = commentRouter
