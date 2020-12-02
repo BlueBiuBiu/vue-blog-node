@@ -2,9 +2,9 @@ const commentService = require("../service/comment.service")
 
 class commentController {
   async create(ctx,next){
-    const { content, momentId } = ctx.request.body
+    const { content, momentId, commentId } = ctx.request.body
     const { id } = ctx.user
-    const result = await commentService.create(id,content,momentId)
+    const result = await commentService.create(id,content,momentId,commentId)
     ctx.body = result
   }
 
