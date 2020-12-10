@@ -23,7 +23,6 @@ const handlePassword = async (ctx,next) => {
   ctx.request.body.password = md5password(password)
   // console.log(ctx.request.body);
   await next()
-
 }
 
 module.exports = {
