@@ -48,6 +48,20 @@ class momentService {
     return result[0]
   }
 
+  async recentList(offset,limit){
+    const statement = `
+    SELECT m.id id, m.content content, m.createAt createAt, m.updateAt updateAt, m.title title,
+       JSON_OBJECT("id",u.id,"username",u.username) user,
+			 (SELECT COUNT(*) FROM comment c WHERE m.id = c.moment_id) commentCount,
+			 (SELECT COUNT(*) FROM moment_label ml WHERE m.id = ml.moment_id) labelCount
+    FROM moment m
+    LEFT JOIN users u ON m.user_id = u.id
+    ORDER BY updateAt DESC
+    LIMIT ?, ?;`
+    const result = await connection.execute(statement,[offset,limit])
+    return result[0]
+  }
+
   async profileList(offset,limit,id){
     const statement = `
     ${sqlFragment}

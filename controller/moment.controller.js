@@ -24,6 +24,12 @@ class momentController {
     ctx.body = result
   }
 
+  async recentList(ctx, next){
+    const { offset, limit } = ctx.query
+    const result = await momentService.recentList(offset,limit)
+    ctx.body = result
+  }
+
   async profileList(ctx, next){
     const { offset, limit } = ctx.query
     const { id } = ctx.user
